@@ -32,4 +32,75 @@
 
   - `SDKman`이라는 `java version tool`이 존재해 통해 버전을 17버전으로 만들었습니다.
 
-## TodoList Server
+## Hello World
+
+- 기본적이 프로젝트 구조는 아래와 같습니다.
+
+- 프로젝트의 폴더 구조를 보면 `main/java/com/`와 같은 디렉토리가 반복 되는걸 볼수 있습니다.
+
+- `Android`를 해본 사람들이라면 어느정도 감이 오지만, 저런 구조는 앞서 말한 빌드 툴인 `maven`,`gradle`로 인해 생긴것입니다.
+
+```bash
+TodoServer
+├── HELP.md //md 파일
+├── build.gradle // ㅎgradle 설정파일
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew
+├── gradlew.bat
+├── settings.gradle
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── example
+    │   │           └── TodoServer
+    │   │               └── TodoServerApplication.java
+    │   └── resources
+    │       ├── application.properties
+    │       ├── static
+    │       └── templates
+    └── test
+        └── java
+            └── com
+                └── example
+                    └── TodoServer
+                        └── TodoServerApplicationTests.java
+
+```
+
+- `./gradlew bootRun`을 동작시키면 `build.gradle`를 읽고 필요한 `dependency`를 설치하게 됩니다.
+
+- `localhost:8080/hell?name=KUD`라고 들어가면 `name`에서 정한 내용을 읽고 화면에 띄우는걸 볼수있습니다.
+
+![2](./imgs/2.png)
+
+- `Hello World`를 출력하는 코드는 아래와 같습니다. 
+
+```java
+   @SpringBootApplication 
+   // RestController 을통해 TodoServerApplication의 인스턴스를 반환하여 GET 요청을 처리
+   // 또한 모든 메서드가 view 대신 도메인 객체를 반환하는 컨트롤러라고 표현
+   @RestController 
+   public class TodoServerApplication {
+      private static final String template = "Hello, %s!";
+      private  final AtomicLong counter = new AtomicLong();
+
+      public static void main(String[] args) {
+         SpringApplication.run(TodoServerApplication.class, args);
+      }
+
+      // GetMapping은 HTTP GET의 요청을 담당하는 부분
+      // @RequestMapping(method=GET)을 사용하여 처리 가능
+      @GetMapping("/hello")
+      public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+      // 여기에서 반환하는 값은 모두 jackson2를 통해  JSON 변환  
+         return new Greeting(counter.incrementAndGet(),String.format(template,name));
+      }
+
+   }
+```
+
+## REST API
