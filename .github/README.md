@@ -102,5 +102,131 @@ TodoServer
 
    }
 ```
-
+  
 ## REST API
+- 위에서는 `REST`통신을 통해 브라우저에 `Hello World`라는 결과물을 나타내보았습니다.
+
+- 이번에는 서버에서 데이터를 받아서  로그로 보여주는걸 해볼 생각입니다.
+
+```json
+{
+   "type": "success",
+   "value": {
+      "id": 10,
+      "quote": "Really loving Spring Boot, makes stand alone Spring apps easy."
+   }
+}
+```
+
+- 일단 정보를 받아올 객체를 `class` 형식으로 정의하고, `value`의 객체 역시 정의 해주어야합니다.
+
+- 데이터 받는 객체
+```java
+  package com.example.consumingrest;
+  
+  import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+  
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public class Quote {
+  
+    private String type;
+    private Value value;
+  
+    public Quote() {
+    }
+  
+    public String getType() {
+      return type;
+    }
+  
+    public void setType(String type) {
+      this.type = type;
+    }
+  
+    public Value getValue() {
+      return value;
+    }
+  
+    public void setValue(Value value) {
+      this.value = value;
+    }
+  
+    @Override
+    public String toString() {
+      return "Quote{" +
+          "type='" + type + '\'' +
+          ", value=" + value +
+          '}';
+    }
+  }
+```
+
+- value 객체
+```java
+    package com.example.consumingrest;
+    
+    import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+    
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public class Value {
+    
+    private Long id;
+    private String quote;
+    
+    public Value() {
+    }
+    
+    public Long getId() {
+    return this.id;
+    }
+    
+    public String getQuote() {
+    return this.quote;
+    }
+    
+    public void setId(Long id) {
+    this.id = id;
+    }
+    
+    public void setQuote(String quote) {
+    this.quote = quote;
+    }
+    
+    @Override
+    public String toString() {
+    return "Value{" +
+    "id=" + id +
+    ", quote='" + quote + '\'' +
+    '}';
+    }
+    }
+```
+
+- 이제 데이터 통신에서 필요한 객체들을 만들어 보았으니, 통신을할 코드를 짜보도록하겠습니다.
+
+```java
+public class REST {
+//    Log기능을 사용하기 위해 slef4j의 Logger를 가지고 왔습니다.
+  private static final Logger log = LoggerFactory.getLogger(REST.class);
+
+  public static void main(String[] args) {
+    SpringApplication.run(REST.class, args);
+  }
+
+  @Bean
+//  jackson 라이브러리를통해 직렬화 개시
+  public RestTemplate restTemplate(RestTemplateBuilder builder) {
+    return builder.build();
+  }
+
+  @Bean
+  public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+    return args -> {
+      ConsumRest quote =
+              restTemplate.getForObject("https://quoters.apps.pcfone.io/api/random", ConsumRest.class);
+      log.info(quote.toString());
+    };
+  }
+
+}
+```

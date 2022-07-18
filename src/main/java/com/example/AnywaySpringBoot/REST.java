@@ -11,13 +11,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-// @RestController
 public class REST {
 
   private static final Logger log = LoggerFactory.getLogger(REST.class);
-
-  // private static final String template = "Hello, %s!";
-  // private final AtomicLong counter = new AtomicLong();
 
   public static void main(String[] args) {
     SpringApplication.run(REST.class, args);
@@ -37,8 +33,4 @@ public class REST {
     };
   }
 
-  // @GetMapping("/hello")
-  // public BuildRest greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-  //   return new BuildRest(counter.incrementAndGet(), String.format(template, name));
-  // }
 }
