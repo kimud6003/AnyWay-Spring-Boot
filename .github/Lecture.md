@@ -87,3 +87,39 @@
 
    - servlet 객체는 계속 재사용된다.
 
+## Web.xml
+
+- Web.xml이 하는 역할 
+
+   - ServletContext의 초기 파라미터 설정
+
+   - Session의 유효시간 설정 : Session 기간 설정 
+
+   - Servlet/jsp에 대한 정의 
+
+   - Servlet/jsp에 매핑
+
+   - Mime Type 매핑 : Post를 통해 들어온 데이터의 안전성을 유무를 판단하고 가공
+
+   - welcome File List  
+
+   - Erro Pages 처리
+
+   - 리스너/필터 설정
+
+   - 보안
+
+
+## FrontController 패턴
+
+- 최초 앞단에서 요청을 받아서 FrontController에게 넘겨준다.
+
+- 요청이 들어오면 톰캣으로 간다. -> 톰캣은 Request,Response 객체를 만든다. -> web.xml을 통해 요청이 들어오면 -> FrontController가 받는다.
+
+- FrontController를 통해 내부에 있는 자원에 접근을 하게된다. -> 해당 자원을 접근할때 Requeset를 New하게 되는데 이것을 덮어쓰지 않고 유지하는게 RequestDispactcher
+
+## application context
+
+- 요청이 들어옴 -> web.xml -> DispatcherServlet을 통해 src 내부에 있는 component를 스캔해서 new를 진행  -> 메모리에 올려야하는것들은 @어노테이션으로 알림
+
+- web.xml -> ContextLoaderListner로 도착하는 경우에는 모든 스레드가 공통적으로 사용하는 녀석(DB)를 재활용 하기위해서

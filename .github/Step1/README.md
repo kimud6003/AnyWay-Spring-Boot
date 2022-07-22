@@ -43,7 +43,7 @@ TodoServer
 
 - `localhost:8080/hell?name=KUD`라고 들어가면 `name`에서 정한 내용을 읽고 화면에 띄우는걸 볼수있습니다.
 
-![2](./imgs/2.png)
+![2](../imgs/2.png)
 
 - `Hello World`를 출력하는 코드는 아래와 같습니다. 
 

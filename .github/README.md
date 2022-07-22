@@ -34,5 +34,6 @@
 
 ## 목차 (index)
 
-[Step1](./Step1/README.md)
-[Step1](./Step1/README.md)
+[인터넷 강의](./Lecture.md)  
+[Step1](./Step1/README.md)  
+[Step2](./Step2/README.md)  
