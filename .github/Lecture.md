@@ -48,3 +48,42 @@
    - printWriter를 통해 글을 쓸수있다 (print,println)
 
    - spring에서는 @ReponseBody를 통해 BufferedRread,와 @RequestBody를 통해 Bufferedwrite를 사용가능
+
+## JPA ( Java Persistance API ) 
+
+- Persistance라는것은 영구적인것을 의미하는데 Java에 있는 데이터를 DB에 저장할수 있도록 하는 API
+
+- ins(Object Realtional Mapping) : Java에서 만든 클래스를 DB에 Table로 만들어주고 컨트롤할수 있도록 해줌
+
+- Persistance Context : DB와 Java의 Context(모든 정보)를 공유가능
+
+- DB와 OOP의 불일치성을 해결가능 (DB는 객체 저장 불가능, Java는 객체저장 가능)
+
+## HTTP? 톰캣?
+
+- Socket : 연결 Port로 접근하면 새로운 Port를 만들어(스레드) 해당 포트로 클라이언트와 통신하는방법( 서버에 부화가 많음 )
+
+- HTTP : Statelss 방식 Port로 접근한 대상에 대해 바로 응답을 해주는 구조
+
+- Tomcat :
+
+   - 웹서버는 보통 아파치를 사용하는데, 아파치는 .jsp와같은 파일을 읽지 못해서 전송하지 못했다.
+
+   - 그래서 아파치는 .jsp파일을 톰캣에게 전달하고 이것을 컴파일해서 .html파일로 바꿔준다.
+
+   - 그리고 아파치는 이것을 클라이언트에게 다시 전송하는 절차를 밟는다 
+
+- Servlet container:
+
+   - 정적인 파일의 요청만 들어온다면 톰캣은 일을 하지 않는다.
+
+   - 하지만 spring에서는 URI 접근 방식을 요구하기 떄문에 정적파일만 가져오는것은 불가능하다.
+
+   - 요청(java관련된 자원)이 들어오면 서블릿 객체를 생성(init) -> service를 통해 (Post,get,put...)를 구분 -> 구분후 스레드를 통해 Post,get,pu...등을 수행
+
+   - 만약 재요청이 들어오게 된다면, 컨테이너를 만들지 않고 재사용하게 된다
+
+   - 만약 20명이 동시 접근하면 스레드가 20개 까지 늘어나고, 25명이 접근하면 5명이 대기하고 스레드를 재사용(pooling)
+
+   - servlet 객체는 계속 재사용된다.
+
