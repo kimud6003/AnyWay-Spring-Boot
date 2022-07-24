@@ -35,5 +35,7 @@
 ## 목차 (index)
 
 [인터넷 강의](./Lecture.md)  
+[DI](./Spring-init/DI.md)
+[DispatcherServlet](./Spring-init/DispatcherServlet.md
 [Step1](./Step1/README.md)  
 [Step2](./Step2/README.md)  
