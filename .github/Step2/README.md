@@ -2,17 +2,15 @@
 
 - 이번 프로젝트에서는 `DB`를 사용하는 프로젝를 해볼겁니다.
 
--  `H2`를 사용해서 관계형 DB를 만들고 `JDBC`를 통해 DB에 연결과 쿼리를 날려 보도록하겠습니다.
+- `H2`를 사용해서 관계형 DB를 만들고 `JDBC`를 통해 DB에 연결과 쿼리를 날려 보도록하겠습니다.
 
-| H2 | JDBC |
-|--------------- | --------------- |
-|  따로 설치 X  |  Java에서 DB접속  |
-|  용량이 가볍다  |  SQL문을 구성하고 DB에 요청  |
-|  In-Memory Type DB  |  DBMS 벤더에 의존X   |
+| H2                | JDBC                       |
+| ----------------- | -------------------------- |
+| 따로 설치 X       | Java에서 DB접속            |
+| 용량이 가볍다     | SQL문을 구성하고 DB에 요청 |
+| In-Memory Type DB | DBMS 벤더에 의존X          |
 
-- `JDBC`에서 특별히  다른 DB가 없을 경우 자동으로 `H2`데이터 베이스에 연결을 해줍니다.
-
-
+- `JDBC`에서 특별히 다른 DB가 없을 경우 자동으로 `H2`데이터 베이스에 연결을 해줍니다.
 
 ## Project
 
@@ -36,6 +34,7 @@ public class Customer {
 }
 
 ```
+
 - 두번째는 데이터를 저장하고 불러와 보도록하겠습니다.
 
 ```java
@@ -80,6 +79,12 @@ public class DemoApplication implements CommandLineRunner {
         .forEach(customer -> log.info(customer.toString()));
   }
 }
-```  
+```
 
-- Autowired는 
+- `SpringBootApplication`는 `spring`에서 사용되던 3가지 Annotation를 하나로 합친 Annotation입니다.
+
+| Annotation               | 설명                                                                                                                                |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| @Configuration           | Bean 설정을 담당하는 어노테이션                                                                                                     |
+| @EnableAutoConfiguration | Spring Boot에 클래스 경로 설정, 기타 빈 및 다양한 속성 설정을 기반으로 빈 추가를 시작하도록 지시                                    |
+| @ComponentScan           | ComponentScan은 @Component 어노테이션 및 stereotype에 부여된 Class들을 자동으로 Scan하여 Bean으로 등록해주는 역할을 하는 어노테이션 |
